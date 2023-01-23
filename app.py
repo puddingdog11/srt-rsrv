@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 
 from SRT import SRT, SRTLoginError
 from SRT.srt import SRTTrain
+from SRT.passenger import Adult
 
 def set_user_info():
     srtid = input("srt id를 입력하세요 : \n")
@@ -22,12 +23,15 @@ def set_resv_info():
     date = input("예약 날짜를 입력하세요(ex: 20210101) : \n")
     time = input("출발 시간을 입력하세요(ex: 144000) : \n")
     time_limit = input("출발시간 한도를 입력하세요(ex: 180000) : \n")
+    passengers = input("탑승자 수를 입력하세요 : \n")
+    passenger_list = [Adult() for i in range(int(passengers))]
     info = {
         "dep" : dep,
         "arr" : arr,
         "date" : date,
         "time" : time,
         "time_limit" : time_limit,
+        "passenger_list" : passenger_list,
     }
     print(info)
     return info
@@ -105,7 +109,7 @@ def main():
         for i in trains_refined:
             if not is_resv:
                 # todo: 예약시 알람 보내기
-                srt.reserve(i)
+                srt.reserve(i, passengers=resv["passenger_list"])
                 print("예약하였습니다")
                 is_resv = srt.get_reservations()
                 if is_send_naver_email:
