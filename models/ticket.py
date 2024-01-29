@@ -6,6 +6,7 @@ class Ticket(BaseModel):
     passengers: List[PassengerInfo]
     departure_station: str
     destination_station: str
+    date: str
     departure_time_from: str
     departure_time_to: str
 
