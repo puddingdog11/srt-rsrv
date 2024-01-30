@@ -1,6 +1,7 @@
 from pydantic import BaseModel
+from typing import List
 from enum import Enum
-from passenger import PassengerInfo
+from models.passenger import PassengerInfo
 
 class Ticket(BaseModel):
     passengers: List[PassengerInfo]

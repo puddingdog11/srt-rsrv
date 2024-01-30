@@ -1,5 +1,6 @@
 from enum import Enum
 
+from pydantic import BaseModel
 
 # SRTrain에서 예약하기 위해 사용할 승객 클래스
 class Passenger:
@@ -26,10 +27,10 @@ class PassengerType(Enum):
     ELDERLY = 4
     CHILD = 5
     
-class PassengerInfo(BaseModel):
-    seat_type : SeatType
-    passenger_type: PaasengerType
-
 class SeatType(Enum):
     SPECIAL = 1
     GENERAL = 2
+    
+class PassengerInfo(BaseModel):
+    seat_type : SeatType
+    passenger_type: PassengerType

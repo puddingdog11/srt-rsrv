@@ -1,0 +1,31 @@
+
+User:
+  id: "아이디"
+  pw: "비밀번호"
+
+Reservations:
+  - Ticket:
+      depature: "오송"
+      arrival: "목포"
+      date: "2021-06-01"
+      departure_time: "09:00"
+      time_limit: "23:59"
+    Passengers:
+      Adult: 2
+      Child: 0
+      Senior: 0
+      Disability1To3: 0
+      Disability4To6: 0
+
+  # - Ticket:
+  #     depature: "오송"
+  #     arrival: "목포"
+  #     date: "2021-06-01"
+  #     departure_time: "09:00"
+  #     time_limit: "2021-05-31 23:59"
+  #   Passengers:
+  #     Adult: 0
+  #     Child: 0
+  #     Senior: 0
+  #     Disability1To3: 0
+  #     Disability4To6: 0
