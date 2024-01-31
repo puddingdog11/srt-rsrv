@@ -9,24 +9,33 @@ class User:
         self.password = password
         ...
  
-class SrtUserModel(BaseModel):
+class TrainUser(BaseModel):
+    ...
+ 
+class SrtUserModel(TrainUser):
     id: str
     pw: str
+    
+    def get_pw(self):
+        return self.pw
+    
+    def get_id(self):
+        return self.id
     
     @validator('pw')
     def validate_password(cls, pw):
         # 패스워드가 최소 8자 이상이고, 소문자, 대문자, 숫자, 특수 문자를 포함하는지 검사
         if len(pw) < 8:
             raise ValueError('Password must be at least 8 characters long')
-        if not any(char.islower() for char in pw):
-            raise ValueError('Password must contain at least one lowercase letter')
-        if not any(char.isupper() for char in pw):
-            raise ValueError('Password must contain at least one uppercase letter')
+        # if not any(char.islower() for char in pw):
+        #     raise ValueError('Password must contain at least one lowercase letter')
+        # if not any(char.isupper() for char in pw):
+        #     raise ValueError('Password must contain at least one uppercase letter')
         if not any(char.isdigit() for char in pw):
             raise ValueError('Password must contain at least one digit')
-        if not any(char in "@#$%^&+=" for char in pw):
+        if not any(char in "@#$%^&+=!" for char in pw):
             raise ValueError('Password must contain at least one of @#$%^&+=')
         return pw
     
-    class Config:
-        orm_mode = True
+    # class Config:
+    #     orm_mode = True
