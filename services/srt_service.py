@@ -6,6 +6,7 @@ from SRT.passenger import Adult, Child, Disability1To3, Disability4To6, Senior
 from typing import List
 from models.user import TrainUser
 from models.ticket import Ticket
+from models.passenger import PassengerInfo, PassengerType
 
 
 class SRTService:
@@ -13,7 +14,9 @@ class SRTService:
 
     def __init__(self, user : TrainUser):
         self.user = user
+        self.srt = None
         
+    def login(self):
         """Login to SRT."""
         try:
             self.srt = SRT(self.user.get_id(), self.user.get_pw())
@@ -27,9 +30,10 @@ class SRTService:
         print("Searching Train...")
         trains = self.search_train(ticket)
         _ticket = ticket
+        passengers = [self.ToPassenger(p) for p in _ticket.passengers]
         if trains is not None:
             for train in trains:
-                self.reservation = self.srt.reserve(train, _ticket["passengers"])
+                self.reservation = self.srt.reserve(train, passengers)
                 print("Reservation Success! Ticket Info: ", _ticket)
                 if self.reservation:
                     return True
@@ -50,3 +54,17 @@ class SRTService:
             print("No available train.")
         
         return trains
+    
+    def ToPassenger(self, passenger_info : PassengerInfo):
+        _type = passenger_info.passenger_type
+        if _type == PassengerType.ADULT:
+            return Adult()
+        elif _type == PassengerType.CHILD:
+            return Child()
+        elif _type == PassengerType.SENIOR:
+            return Senior()
+        elif _type == PassengerType.DISABLED_1_3:
+            return Disability1To3
+        elif _type == PassengerType.DISABLED_4_6:
+            return Disability4To6()
+        

@@ -24,7 +24,7 @@ class PassengerType(Enum):
     ADULT = 1
     DISABLED_1_3 = 2
     DISABLED_4_6 = 3
-    ELDERLY = 4
+    SENIOR = 4
     CHILD = 5
     
 class SeatType(Enum):
