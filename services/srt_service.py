@@ -14,7 +14,6 @@ class SRTService:
     def __init__(self, user : TrainUser):
         self.user = user
         
-    def login(self) -> bool:
         """Login to SRT."""
         try:
             self.srt = SRT(self.user.get_id(), self.user.get_pw())
@@ -22,17 +21,16 @@ class SRTService:
         except SRTLoginError as e:
             print("Login Failed.")
             print(e)
-            return False
-        return True
     
     def reserve(self, ticket : Ticket) -> bool:
         """Reserve tickets."""
         print("Searching Train...")
         trains = self.search_train(ticket)
+        _ticket = ticket
         if trains is not None:
             for train in trains:
-                self.reservation = self.srt.reserve(train, self.ticket)
-                print("Reservation Success! Ticket Info: ", self.ticket)
+                self.reservation = self.srt.reserve(train, _ticket["passengers"])
+                print("Reservation Success! Ticket Info: ", _ticket)
                 if self.reservation:
                     return True
         print("Reservation Failed.")
