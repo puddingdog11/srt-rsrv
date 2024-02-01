@@ -7,10 +7,11 @@ from SRT.reservation import SRTReservation
 
 from models.user import SrtUserModel, TrainUser
 from models.ticket import Ticket
+from services.srt_service import SRTService
 
 class ReserveService:
 
-    def __init__(self, ticket : Ticket, service):
+    def __init__(self, ticket : Ticket, service: SRTService):
         self.ticket = ticket
         self.train_service = service
         
@@ -28,6 +29,9 @@ class ReserveService:
             else:
                 continue
         return True
+    
+    def get_reservation(self):
+        return self.train_service.get_reservations()
         
 
 # class ReserveService:

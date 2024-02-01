@@ -1,5 +1,5 @@
 
-from SRT import SRT, SRTLoginError
+from SRT import SRT, SRTLoginError, SRTResponseError
 from SRT.srt import SRTTrain
 from SRT.passenger import Adult, Child, Disability1To3, Disability4To6, Senior
 
@@ -33,10 +33,13 @@ class SRTService:
         passengers = [self.ToPassenger(p) for p in _ticket.passengers]
         if trains is not None:
             for train in trains:
-                self.reservation = self.srt.reserve(train, passengers)
-                print("Reservation Success! Ticket Info: ", _ticket)
-                if self.reservation:
-                    return True
+                try:
+                    self.reservation = self.srt.reserve(train, passengers)
+                    print("Reservation Success! Ticket Info: ", _ticket)
+                    if self.reservation:
+                        return True
+                except SRTResponseError as e:
+                    print(e)
         print("Reservation Failed.")
         return False
     
@@ -54,6 +57,10 @@ class SRTService:
             print("No available train.")
         
         return trains
+    
+    def get_reservations(self):
+        """Get reservations."""
+        return self.srt.get_reservations()
     
     def ToPassenger(self, passenger_info : PassengerInfo):
         _type = passenger_info.passenger_type

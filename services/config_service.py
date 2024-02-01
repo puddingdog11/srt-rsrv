@@ -79,3 +79,6 @@ class YamlConfigService(ConfigService):
         )
             
         return srt_user
+    
+    def load_notification(self) -> dict:
+        return self.load()['Notification']

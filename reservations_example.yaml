@@ -1,15 +1,15 @@
 
 User:
-  id: "아이디"
-  pw: "비밀번호"
+  id: "enter_your_id_here"
+  pw: "enter_your_pw_here"
 
 Reservations:
   - Ticket:
       depature: "오송"
-      arrival: "목포"
-      date: "2021-06-01"
-      departure_time: "09:00"
-      time_limit: "23:59"
+      arrival: "수서"
+      date: "20240101"
+      departure_time: "090000"
+      time_limit: "180000"
     Passengers:
       Adult: 2
       Child: 0
@@ -19,13 +19,20 @@ Reservations:
 
   # - Ticket:
   #     depature: "오송"
-  #     arrival: "목포"
-  #     date: "2021-06-01"
-  #     departure_time: "09:00"
-  #     time_limit: "2021-05-31 23:59"
+  #     arrival: "동탄"
+  #     date: "20240101"
+  #     departure_time: "090000"
+  #     time_limit: "180000"
   #   Passengers:
-  #     Adult: 0
+  #     Adult: 1
   #     Child: 0
   #     Senior: 0
   #     Disability1To3: 0
   #     Disability4To6: 0
+
+Notification:
+  aligo: 
+    key: "enter_your_key_here"
+    user_id: "enter_your_user_id_here"
+    sender: "01011112222"
+    receiver: "01011112222"
